@@ -158,6 +158,22 @@ function parseExpression(input, decimalComma)
     console.log('plus', plusOperators, '\nminus', minusOperators, '\ndivide', divideOperators, '\nmultiply', multiplyOperators)
 }
 
+function outputDecimalType(result, decimalComma) {
+    if (typeof result != "number")
+    {
+        return null
+    }
+
+    var resultString = result.toString();
+    
+    if (decimalComma)
+    {
+        resultString = resultString.replace(/\./gi, ',')
+    }
+
+    return resultString
+}
+
 function calculator(input, decimalComma)
 {
     if (input == '')
@@ -177,8 +193,10 @@ function calculator(input, decimalComma)
         errors = calculated[1] 
     }
 
-    console.log({result: result, errors: errors, hasErrors: (errors.length > 0)})
-    return {result: result, errors: errors, hasErrors: (errors.length > 0)}
+    var resultString = outputDecimalType(result, decimalComma)
+
+    console.log({result: resultString, errors: errors, hasErrors: (errors.length > 0)})
+    return {result: resultString, errors: errors, hasErrors: (errors.length > 0)}
 }
 
 
