@@ -27,20 +27,11 @@
         <br><br>
         <input v-model="input" class="input" type="text" placeholder="Enter a calculation">
         <br><br>
-        <span class="errors" v-if="output.hasErrors">
-          Errors:<br>
-          <ul>
-            <li v-for="error in output.errors">
-              {{ error }}
-            </li>
-          </ul>
-        </span>
-        <span v-else>
+        <span v-if="!output.hasErrors">
           Calculation Result:<br>
           <span class="calculation-result">{{ output.result }}</span>
         </span>
         <div class="calculator-buttons">
-
         <button class="button is-white" id="num7" @click="button">7</button>
         <button class="button is-white" id="num8" @click="button">8</button>
         <button class="button is-white" id="num9" @click="button">9</button>
@@ -61,9 +52,15 @@
         <button class="button is-white" id="blank" disabled></button>
         <button class="button is-white" id="blank" disabled></button>
         <button class="button is-white" id="equals" @click="button" disabled>=</button>
-
-
         </div>
+        <span class="errors" v-if="output.hasErrors">
+          Errors:<br>
+          <ul>
+            <li v-for="error in output.errors">
+              {{ error }}
+            </li>
+          </ul>
+        </span>
       </div>
     </div>
   <script src="index.js"></script>

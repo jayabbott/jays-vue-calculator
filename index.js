@@ -199,6 +199,54 @@ function calculator(input, decimalComma)
     return {result: resultString, errors: errors, hasErrors: (errors.length > 0)}
 }
 
+function backspace(input)
+{
+    return input.slice(0, -1);
+}
+
+function addCharacter(char, input)
+{
+    return input + char
+}
+
+function buttonPress(buttonId, input)
+{
+    switch (buttonId)
+    {
+        case 'del':
+            return backspace(input)
+            break;
+        case 'ac':
+            return ''
+            break;
+        case 'multiply':
+            return addCharacter('*', input)
+            break;
+        case 'divide':
+            return addCharacter('/', input)
+            break;
+        case 'plus':
+            return addCharacter('+', input)
+            break;            
+        case 'minus':
+            return addCharacter('-', input)
+            break;
+        case 'equals':
+            console.log('EQ')
+            break;
+        case 'decimal':
+            return addCharacter('.', input)
+            break;
+        default:
+            if (buttonId.includes('num'))
+            {
+                return addCharacter(buttonId.split('')[3], input)
+            }
+            return input
+            break;
+    }
+}
+
 
 var vm = new Vue({
     el: '#calculator-app',
@@ -211,7 +259,7 @@ var vm = new Vue({
             this.decimalComma = !this.decimalComma
         },
         button: function(e) {
-            console.log(e)
+            this.input = buttonPress(e.toElement.id, this.input)
         }
     },
     computed: {
