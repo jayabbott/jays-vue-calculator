@@ -209,6 +209,9 @@ var vm = new Vue({
     methods: {
         swapTypeDecimal: function() {
             this.decimalComma = !this.decimalComma
+        },
+        button: function(e) {
+            console.log(e)
         }
     },
     computed: {
