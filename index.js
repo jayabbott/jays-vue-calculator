@@ -209,7 +209,7 @@ function addCharacter(char, input)
     return input + char
 }
 
-function buttonPress(buttonId, input)
+function buttonPress(buttonId, input, decimalComma)
 {
     switch (buttonId)
     {
@@ -235,7 +235,15 @@ function buttonPress(buttonId, input)
             console.log('EQ')
             break;
         case 'decimal':
-            return addCharacter('.', input)
+            if (decimalComma)
+            {
+                return addCharacter(',', input)
+            }
+            else
+            {
+                return addCharacter('.', input)
+            }
+            
             break;
         default:
             if (buttonId.includes('num'))
@@ -259,7 +267,7 @@ var vm = new Vue({
             this.decimalComma = !this.decimalComma
         },
         button: function(e) {
-            this.input = buttonPress(e.toElement.id, this.input)
+            this.input = buttonPress(e.toElement.id, this.input, this.decimalComma)
         }
     },
     computed: {
@@ -274,6 +282,17 @@ var vm = new Vue({
             else 
             {
                 return 'full stop (.)'
+            }
+            
+        },
+        decimalTypeButton: function () {
+            if (this.decimalComma)
+            {
+                return ','
+            }
+            else 
+            {
+                return '.'
             }
             
         },
