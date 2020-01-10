@@ -41,9 +41,6 @@
         <button class="button is-white" id="minus" @click="button">-</button>
         <button class="button is-white" id="num0" @click="button">0</button>
         <button class="button is-white" id="decimal" @click="button">{{ decimalTypeButton }}</button>
-        <button class="button is-white" id="blank" disabled></button>
-        <button class="button is-white" id="blank" disabled></button>
-        <button class="button is-white" id="equals" @click="button" disabled>=</button>
         </div>
         <div class="errors" v-if="output.hasErrors">
           Errors:<br>

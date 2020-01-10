@@ -63,15 +63,15 @@ function parseTerm(input, errors, sideOfOperator, decimalComma)
     
     var numberDigitCharacters = (termString.match(/\d/g)||[]).length
 
-    if (numberDigitCharacters == 0)
-    {
-        errors.push('Blank ' + sideOfOperator + ' term')
-        return [termString, errors]
-    }
-
     if (numberDigitCharacters + deciamlPoints != termString.length)
     {
         errors.push('Invalid Characters in ' + sideOfOperator + ' term')
+        return [termString, errors]
+    }
+
+    if (numberDigitCharacters == 0)
+    {
+        errors.push('Blank ' + sideOfOperator + ' term')
         return [termString, errors]
     }
 
@@ -154,8 +154,6 @@ function parseExpression(input, decimalComma)
     errors = parseRight[1]
 
     return [expression, errors]
-
-    console.log('plus', plusOperators, '\nminus', minusOperators, '\ndivide', divideOperators, '\nmultiply', multiplyOperators)
 }
 
 function outputDecimalType(result, decimalComma) {
@@ -195,7 +193,6 @@ function calculator(input, decimalComma)
 
     var resultString = outputDecimalType(result, decimalComma)
 
-    console.log({result: resultString, errors: errors, hasErrors: (errors.length > 0)})
     return {result: resultString, errors: errors, hasErrors: (errors.length > 0)}
 }
 
@@ -213,7 +210,7 @@ function buttonPress(buttonId, input, decimalComma)
 {
     switch (buttonId)
     {
-        case 'del':
+        case 'delete':
             return backspace(input)
             break;
         case 'ac':
@@ -232,7 +229,7 @@ function buttonPress(buttonId, input, decimalComma)
             return addCharacter('-', input)
             break;
         case 'equals':
-            console.log('EQ')
+            console.log('EQ not implemented')
             break;
         case 'decimal':
             if (decimalComma)
