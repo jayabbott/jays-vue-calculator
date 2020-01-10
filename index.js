@@ -42,19 +42,11 @@ function parseTerm(input, errors, sideOfOperator, decimalComma)
 
     if (decimalComma)
     {
-        var deciamlPoints = (termString.match(/\,/g)||[]).length
+        termString = termString.replace(/\,/gi, '.')
     }
-    else
-    {
-        var deciamlPoints = (termString.match(/\./g)||[]).length
-    }
-
-    if (deciamlPoints > 1)
-    {
-        errors.push('Multiple decimal points in ' + sideOfOperator + ' term')
-        return [termString, errors]
-    }
-
+    
+    var deciamlPoints = (termString.match(/\./g)||[]).length
+    
     if (deciamlPoints > 1)
     {
         errors.push('Multiple decimal points in ' + sideOfOperator + ' term')
@@ -172,6 +164,17 @@ function outputDecimalType(result, decimalComma) {
     return resultString
 }
 
+function replaceInputDecial(input, decimalComma) {
+    if (decimalComma)
+    {
+        return input.replace(/\./gi, ',')
+    }
+    else
+    {
+        return input.replace(/\,/gi, '.')
+    }
+}
+
 function calculator(input, decimalComma)
 {
     if (input == '')
@@ -262,6 +265,7 @@ var vm = new Vue({
     methods: {
         swapTypeDecimal: function() {
             this.decimalComma = !this.decimalComma
+            this.input = replaceInputDecial(this.input, this.decimalComma)
         },
         button: function(e) {
             this.input = buttonPress(e.toElement.id, this.input, this.decimalComma)
